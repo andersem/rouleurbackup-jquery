@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rouleurbackup</title>
+    <script
+            src="http://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div id="leaderboard"></div>
+
+<script>
+    (function() {
+        var url = "https://6slz00ld46.execute-api.eu-central-1.amazonaws.com/prod/leaderboard?segmentId=12098216,1387885,1942901,4252879,5311719,632847,660072,665413,7121442,734891";
+
+        $.getJSON(url, function (data) {
+            var items = [];
+            console.log(data);
+            data.forEach(function (athlete) {
+                console.log(athlete);
+                items.push("<li>" + athlete.athlete_name + " - " + athlete.points + "</li>");
+            });
+
+            $("<ol/>", {
+                "class": "my-new-list",
+                html: items.join("")
+            }).appendTo("body");
+        });
+    })();
+</script>
+</body>
+</html>
