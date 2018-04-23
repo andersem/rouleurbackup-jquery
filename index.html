@@ -7,10 +7,20 @@
             src="http://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css" type="text/css"></link>
 </head>
 <body>
 
-<div id="leaderboard"></div>
+<table class="container" id="leaderboard">
+  <thead>
+  <tr>
+    <th><h1>#</h1></th>
+    <th><h1>Navn</h1></th>
+    <th><h1>Antall segmenter</h1></th>
+    <th><h1>Points</h1></th>
+  </tr>
+  </thead>
+</table>
 
 <script>
     (function() {
@@ -18,14 +28,19 @@
 
         $.getJSON(url, function (data) {
             var items = [];
-            data.forEach(function (athlete) {
-                items.push("<li>" + athlete.athlete_name + " - " + athlete.points + "</li>");
+            data.forEach(function (athlete, i) {
+                items.push("<tr>");
+                items.push("<td>" + (i + 1) + "</td>");
+                items.push("<td>" + athlete.athlete_name + "</td>");
+                items.push("<td>" + athlete.segments.length + "</td>");
+                items.push("<td>" + athlete.points + "</td>");
+                items.push("<tr>");
             });
 
-            $("<ol/>", {
-                "class": "my-new-list",
+            $("<tbody/>", {
+                "class": "table-body",
                 html: items.join("")
-            }).appendTo("body");
+            }).appendTo("#leaderboard");
         });
     })();
 </script>
