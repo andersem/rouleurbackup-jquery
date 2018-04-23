@@ -18,9 +18,7 @@
 
         $.getJSON(url, function (data) {
             var items = [];
-            console.log(data);
             data.forEach(function (athlete) {
-                console.log(athlete);
                 items.push("<li>" + athlete.athlete_name + " - " + athlete.points + "</li>");
             });
 
